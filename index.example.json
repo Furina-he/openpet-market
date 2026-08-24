@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "updatedAt": 0,
+  "items": [
+    {
+      "id": "sage-of-the-tower",
+      "name": "塔中贤者",
+      "version": "1.0.0",
+      "type": "soul",
+      "summary": "话少、爱讲古的老学者。适合安静陪伴与知识闲聊。",
+      "tags": ["fantasy", "calm", "zh"],
+      "author": "example-author",
+      "license": "CC-BY-4.0",
+      "preview": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/previews/sage-of-the-tower.png",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/sage-of-the-tower.dssoul",
+      "size": 8421,
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "openpet-demo",
+      "name": "openpet 示例角色",
+      "version": "1.0.0",
+      "type": "full",
+      "summary": "带模型的完整角色包示例（模型自制，作者已授权再分发）。",
+      "tags": ["vrm", "demo"],
+      "author": "openpet",
+      "license": "CC0-1.0",
+      "preview": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/previews/openpet-demo.png",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/openpet-demo.dspack",
+      "size": 12582912,
+      "minAppVersion": "0.1.0",
+      "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+      "id": "shrine-maiden",
+      "name": "巫女小铃",
+      "version": "1.1.0",
+      "type": "ref",
+      "summary": "人设包 + 推荐搭配的外部模型（模型请到原作页自行获取）。",
+      "tags": ["shrine", "zh"],
+      "author": "example-author",
+      "license": "CC-BY-NC-4.0",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/shrine-maiden.dssoul",
+      "size": 9033,
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "modelSource": {
+        "name": "原作者 Booth 页面",
+        "url": "https://booth.pm/",
+        "note": "请遵守原模型的使用条款；下载后在 openpet 中作为角色包导入，再于安装弹窗里选它作「形象来源」。"
+      }
+    }
+  ]
+}
