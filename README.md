@@ -9,7 +9,7 @@ openpet 的**角色市场索引仓**。这里没有服务器、没有账号、�
   - GitHub raw：`https://raw.githubusercontent.com/Furina-he/openpet-market/main/index.json`
 
 > jsDelivr 有 CDN 缓存（分钟级），刚合并的条目可能要等一会儿才在 CDN 源可见；GitHub raw 是即时的。
-> **jsDelivr 单文件上限 20MB**：超限的包（`build.mjs` 自动判断）`downloadUrl` 改走 GitHub raw——国内直连 raw 可能不通，所以**模型请尽量压到 20MB 以内**（VRM 贴图降到 1024 通常就够）。
+> **jsDelivr 单文件上限 20MB**：超限的包 `build.mjs` 会自动把 `downloadUrl` 改走 GitHub raw（无体积限制，git 单文件 100MB 封顶）。**不要求压缩模型**——包本身是 zip 无损容器，解压后与原文件逐字节一致；原模型原样打包即可。
 
 ## 目录结构
 
