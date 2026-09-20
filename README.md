@@ -9,6 +9,7 @@ openpet 的**角色市场索引仓**。这里没有服务器、没有账号、�
   - GitHub raw：`https://raw.githubusercontent.com/Furina-he/openpet-market/main/index.json`
 
 > jsDelivr 有 CDN 缓存（分钟级），刚合并的条目可能要等一会儿才在 CDN 源可见；GitHub raw 是即时的。
+> **jsDelivr 单文件上限 20MB**：超限的包（`build.mjs` 自动判断）`downloadUrl` 改走 GitHub raw——国内直连 raw 可能不通，所以**模型请尽量压到 20MB 以内**（VRM 贴图降到 1024 通常就够）。
 
 ## 目录结构
 
@@ -72,7 +73,7 @@ sha256 与体积由脚本回填，不会写错。
    - 灵魂包：新建 `souls/<id>/soul.json`（照 `souls/xiaoling/` 抄形状；可放一张 `preview.png`），或用主仓脚本从 SillyTavern 卡批量转（见下）。
    - 完整包 / 形象包：在 openpet 里「角色库 → ⋮ → 导出 .dspack」/「形象 → 导出 .dsbody」，放进 `packs/`。
 2. 往 `index.json` 的 `items` 里加一条（summary / tags / author / license / type 手写；`downloadUrl` `size` `sha256` 先留空）。
-3. 跑 `node scripts/build.mjs`——灵魂包会被打包进 `packs/`，三个机器字段自动回填。手放的 `.dspack`/`.dsbody` 请自己算好 sha256 填入，再跑 `node scripts/build.mjs --check` 确认一致。
+3. 跑 `node scripts/build.mjs`——灵魂包被打包进 `packs/`，手放的 `packs/<id>.dspack|.dsbody` 按条目 id 对上；`downloadUrl` / `size` / `sha256` 三个机器字段全部自动回填。提 PR 前再跑一次 `--check`。
 4. 提 PR，在描述里回答：
    - 内容来源（原创 / 二创 / 转载自哪里）
    - 你有什么权利分发它（自制 / 授权链接 / 许可证）

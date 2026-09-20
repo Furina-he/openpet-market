@@ -8,7 +8,8 @@
  *   - souls/<id>/soul.json 是灵魂包的人类可编辑源；同目录下的 preview.png|jpg|webp 会一并打进包并复制到 previews/。
  *   - index.json 的条目（summary/tags/author/license/type…）手工维护；本脚本只回填三个「机器字段」：
  *     sha256 / size / downloadUrl（以及 preview URL，若源目录里有预览图）。
- *   - 完整包 .dspack / 肉体包 .dsbody 不经本脚本生成（在 openpet 里导出），直接放进 packs/ 后跑 --check 即可。
+ *   - 完整包 .dspack / 肉体包 .dsbody 不经本脚本生成（在 openpet 里导出），放进 packs/<id>.dspack|.dsbody 后跑 build 即回填；
+ *     超过 20MB 的文件自动改走 GitHub raw（jsDelivr gh/ 源单文件上限 20MB）。
  */
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
@@ -120,21 +121,42 @@ if (existsSync(soulsDir) && !checkOnly) {
   }
 }
 
-// 2) 校验 index.json 每条与 packs/ 实物一致
+// 2) 手放的 .dspack/.dsbody：按 id 对应 packs/<id>.dspack|.dsbody 回填 / 校验
+//    jsDelivr 单文件上限 20MB（gh/ 源）——超限的走 GitHub raw（无上限，但国内直连可能不通）
+const JSDELIVR_MAX = 20 * 1024 * 1024;
+const RAW_BASE = 'https://raw.githubusercontent.com/Furina-he/openpet-market/main';
 for (const it of index.items) {
-  const m = /\/packs\/([^/]+)$/.exec(it.downloadUrl ?? '');
-  if (!m) continue; // 外部托管的下载地址不校验
-  const file = path.join(ROOT, 'packs', m[1]);
+  if (it.type === 'soul' || it.type === 'ref') continue; // 已由 souls/ 处理
+  const ext = it.type === 'body' ? 'dsbody' : 'dspack';
+  const fname = `${it.id}.${ext}`;
+  const file = path.join(ROOT, 'packs', fname);
   if (!existsSync(file)) {
-    console.error(`✗ ${it.id}: packs/${m[1]} 不存在`);
-    problems++;
-    continue;
+    if (/\/packs\//.test(it.downloadUrl ?? '')) { console.error(`✗ ${it.id}: packs/${fname} 不存在`); problems++; }
+    continue; // 外部托管的下载地址不校验
   }
   const buf = readFileSync(file);
-  if (it.sha256 !== sha256(buf) || it.size !== buf.length) {
-    console.error(`✗ ${it.id}: sha256/size 与 packs/${m[1]} 不符（跑 node scripts/build.mjs 回填）`);
-    problems++;
+  const digest = sha256(buf);
+  const base = buf.length > JSDELIVR_MAX ? RAW_BASE : BASE_URL;
+  const url = `${base}/packs/${fname}`;
+  if (checkOnly) {
+    if (it.sha256 !== digest || it.size !== buf.length || it.downloadUrl !== url) {
+      console.error(`✗ ${it.id}: sha256/size/downloadUrl 与 packs/${fname} 不符（跑 node scripts/build.mjs 回填）`);
+      problems++;
+    }
+  } else {
+    it.sha256 = digest; it.size = buf.length; it.downloadUrl = url;
+    console.info(`✓ ${fname}  ${(buf.length / 1048576).toFixed(1)} MB  ${digest.slice(0, 12)}…${buf.length > JSDELIVR_MAX ? '  (>20MB → GitHub raw)' : ''}`);
   }
+}
+// 3) 灵魂包校验（--check 时）
+if (checkOnly) for (const it of index.items) {
+  if (it.type !== 'soul' && it.type !== 'ref') continue;
+  const m = /\/packs\/([^/]+)$/.exec(it.downloadUrl ?? '');
+  if (!m) continue;
+  const file = path.join(ROOT, 'packs', m[1]);
+  if (!existsSync(file)) { console.error(`✗ ${it.id}: packs/${m[1]} 不存在`); problems++; continue; }
+  const buf = readFileSync(file);
+  if (it.sha256 !== sha256(buf) || it.size !== buf.length) { console.error(`✗ ${it.id}: sha256/size 与 packs/${m[1]} 不符`); problems++; }
 }
 
 if (!checkOnly && problems === 0) {

@@ -1,13 +1,33 @@
 {
   "version": 1,
-  "updatedAt": 1789914682962,
+  "updatedAt": 1789918276236,
   "items": [
     {
       "id": "xiaoling",
       "name": "小灵",
       "version": "1.0.0",
+      "type": "full",
+      "summary": "openpet 官方默认角色完整包：温和好奇的桌面伙伴 + VRM 形象。装好即用，适合第一次接触 openpet 的你。",
+      "tags": [
+        "官方",
+        "默认",
+        "vrm",
+        "陪伴",
+        "zh"
+      ],
+      "author": "openpet",
+      "license": "CC0-1.0",
+      "downloadUrl": "https://raw.githubusercontent.com/Furina-he/openpet-market/main/packs/xiaoling.dspack",
+      "size": 21385221,
+      "sha256": "c270c272dcf455fb31ec1fec0a3cdec6dd77c9e801189d0ebf10e152ef4e1cec",
+      "minAppVersion": "0.1.0"
+    },
+    {
+      "id": "xiaoling-soul",
+      "name": "小灵（灵魂）",
+      "version": "1.0.0",
       "type": "soul",
-      "summary": "openpet 官方默认伙伴：温和、好奇、有点小机灵。安静陪着你干活，想聊就搭话。适合借给任何形象。",
+      "summary": "小灵的人设文本：温和、好奇、有点小机灵。只含灵魂，安装时借一个已装角色的形象。",
       "tags": [
         "官方",
         "默认",
@@ -17,16 +37,56 @@
       ],
       "author": "openpet",
       "license": "CC0-1.0",
-      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/xiaoling.dssoul",
-      "size": 1262,
-      "sha256": "150107d44f9f31e74ab0a5656ccc3812316b127da9ce153ddca63e99c61081bd"
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/xiaoling-soul.dssoul",
+      "size": 1267,
+      "sha256": "76766be4200314914e38d71e28e454f429b6edecaff35b9f34ea0eba43035647"
+    },
+    {
+      "id": "xiaoling-body",
+      "name": "小灵（形象）",
+      "version": "1.0.0",
+      "type": "body",
+      "summary": "小灵的 VRM 形象包：10 组情绪映射 + 11 个动作。装进形象库后可给任意角色一键换形象，记忆与会话保留。",
+      "tags": [
+        "官方",
+        "vrm",
+        "形象",
+        "zh"
+      ],
+      "author": "openpet",
+      "license": "CC0-1.0",
+      "downloadUrl": "https://raw.githubusercontent.com/Furina-he/openpet-market/main/packs/xiaoling-body.dsbody",
+      "size": 21384369,
+      "sha256": "52ea0f8699deb579c2dea8da2a3623264c0699e69685661ff41f2602bb2a24b1",
+      "minAppVersion": "0.1.0"
     },
     {
       "id": "furina",
       "name": "芙宁娜",
       "version": "1.0.0",
-      "type": "ref",
-      "summary": "枫丹的舞台明星与前水神代理者。华丽、骄傲、俏皮，把日常都当成一出戏；真正要紧时会认真陪你。含枫丹小册世界书。",
+      "type": "full",
+      "summary": "枫丹的舞台明星完整包：华丽俏皮的人设 + 枫丹小册世界书 + 16 条戏剧风交互台词 + VRM 形象。装好即用。",
+      "tags": [
+        "原神",
+        "枫丹",
+        "戏剧",
+        "傲娇",
+        "vrm",
+        "zh"
+      ],
+      "author": "openpet",
+      "license": "CC-BY-4.0（人设文本与模型均可再分发）；角色 IP 归米哈游《原神》所有，本包为非商业二创",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/furina.dspack",
+      "size": 6124553,
+      "sha256": "c43d3e1a46fb17ffaa8cc7d144a77bfd8fe8e0a61e4a4ebb00ecf628a05694fa",
+      "minAppVersion": "0.1.0"
+    },
+    {
+      "id": "furina-soul",
+      "name": "芙宁娜（灵魂）",
+      "version": "1.0.0",
+      "type": "soul",
+      "summary": "芙宁娜的人设与枫丹小册世界书。只含灵魂，安装时借一个已装角色的形象——想让她换个身体就选这个。",
       "tags": [
         "原神",
         "枫丹",
@@ -35,15 +95,29 @@
         "zh"
       ],
       "author": "openpet",
-      "license": "CC-BY-4.0（人设文本）；角色 IP 归米哈游《原神》所有，本包为非商业二创，不含任何模型文件",
-      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/furina.dssoul",
-      "size": 2222,
-      "sha256": "fc6c4a6cb8fbfb3e3427934bc65ff2b3b359ed4b4293cc7412a1f940f36eb884",
-      "modelSource": {
-        "name": "芙宁娜 VRM 模型（第三方，自行获取）",
-        "url": "https://hub.vroid.com/",
-        "note": "本条目只含人设与世界书，不托管模型。请自行获取一个 VRM 形象（VRoid Hub / Booth 等，遵守作者的使用条款），在 openpet 里作为角色包或 .dsbody 形象包导入，安装本灵魂包时在「形象来源」里选它即可。"
-      }
+      "license": "CC-BY-4.0（人设文本与模型均可再分发）；角色 IP 归米哈游《原神》所有，本包为非商业二创",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/furina-soul.dssoul",
+      "size": 2227,
+      "sha256": "ab8e5c26b3a6f529ae4434422a942b795fc78e423f689783fcc09eaaf810da64"
+    },
+    {
+      "id": "furina-body",
+      "name": "芙宁娜（形象）",
+      "version": "1.0.0",
+      "type": "body",
+      "summary": "芙宁娜的 VRM 形象包：11 组情绪映射 + 11 个动作 + 枫丹风格交互台词。可给任意角色一键换形象。",
+      "tags": [
+        "原神",
+        "vrm",
+        "形象",
+        "zh"
+      ],
+      "author": "openpet",
+      "license": "CC-BY-4.0（人设文本与模型均可再分发）；角色 IP 归米哈游《原神》所有，本包为非商业二创",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/furina-body.dsbody",
+      "size": 6122956,
+      "sha256": "ba9a8eef3506b152b3ba78521aa373eb6654b265d909b882173c624929a7953c",
+      "minAppVersion": "0.1.0"
     }
   ]
 }
