@@ -1,5 +1,49 @@
 {
   "version": 1,
-  "updatedAt": 0,
-  "items": []
+  "updatedAt": 1789914682962,
+  "items": [
+    {
+      "id": "xiaoling",
+      "name": "小灵",
+      "version": "1.0.0",
+      "type": "soul",
+      "summary": "openpet 官方默认伙伴：温和、好奇、有点小机灵。安静陪着你干活，想聊就搭话。适合借给任何形象。",
+      "tags": [
+        "官方",
+        "默认",
+        "温和",
+        "陪伴",
+        "zh"
+      ],
+      "author": "openpet",
+      "license": "CC0-1.0",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/xiaoling.dssoul",
+      "size": 1262,
+      "sha256": "150107d44f9f31e74ab0a5656ccc3812316b127da9ce153ddca63e99c61081bd"
+    },
+    {
+      "id": "furina",
+      "name": "芙宁娜",
+      "version": "1.0.0",
+      "type": "ref",
+      "summary": "枫丹的舞台明星与前水神代理者。华丽、骄傲、俏皮，把日常都当成一出戏；真正要紧时会认真陪你。含枫丹小册世界书。",
+      "tags": [
+        "原神",
+        "枫丹",
+        "戏剧",
+        "傲娇",
+        "zh"
+      ],
+      "author": "openpet",
+      "license": "CC-BY-4.0（人设文本）；角色 IP 归米哈游《原神》所有，本包为非商业二创，不含任何模型文件",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/Furina-he/openpet-market@main/packs/furina.dssoul",
+      "size": 2222,
+      "sha256": "fc6c4a6cb8fbfb3e3427934bc65ff2b3b359ed4b4293cc7412a1f940f36eb884",
+      "modelSource": {
+        "name": "芙宁娜 VRM 模型（第三方，自行获取）",
+        "url": "https://hub.vroid.com/",
+        "note": "本条目只含人设与世界书，不托管模型。请自行获取一个 VRM 形象（VRoid Hub / Booth 等，遵守作者的使用条款），在 openpet 里作为角色包或 .dsbody 形象包导入，安装本灵魂包时在「形象来源」里选它即可。"
+      }
+    }
+  ]
 }

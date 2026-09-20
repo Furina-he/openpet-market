@@ -15,19 +15,25 @@ openpet 的**角色市场索引仓**。这里没有服务器、没有账号、�
 ```
 index.json          商品索引（唯一的「市场数据库」）
 index.example.json  字段示例（soul/full/ref 各一条）——**不是线上数据，客户端不读它**
-packs/              可托管的商品文件：<id>.dssoul（灵魂包）/ <id>.dspack（完整包）
+souls/<id>/         灵魂包的**人类可编辑源**：soul.json（+ 可选 preview.png）
+packs/              商品文件：<id>.dssoul（由 souls/ 构建）/ <id>.dspack / <id>.dsbody（openpet 内导出后直接放入）
 previews/           预览图：<id>.png|jpg|webp（建议 ≤ 500KB，方图）
+scripts/build.mjs   零依赖构建：souls/ → packs/*.dssoul，回填 index.json 的 sha256/size/downloadUrl；`--check` 只校验
 ```
 
-> 现在 `index.json` 的 `items` 是空的——市场刚开张，等第一批上架 PR。照 `index.example.json` 的形状写你的条目。
+灵魂包**不要手工打 zip**：改 `souls/<id>/soul.json` → `node scripts/build.mjs` → 提交 `souls/` `packs/` `index.json` 三处即可，
+sha256 与体积由脚本回填，不会写错。
 
-## 商品三型
+## 商品四型
+
+一个角色 = **灵魂**（怎么说话）+ **肉体**（怎么动）+ **声音**（怎么响）。市场按这条切分线流通：
 
 | type | 里面是什么 | 用户安装后 | 适用 |
 | --- | --- | --- | --- |
-| `soul` | `.dssoul`：纯文本人设 + 世界书（无模型文件） | 选一个**已装角色**作「形象来源」，合成新角色 | **主打形态**，无版权风险 |
-| `full` | `.dspack`：完整角色包（含模型） | 直接可用 | 仅限**你有权再分发**的模型 |
-| `ref` | `.dssoul` + 模型外链指引 | 用户自备模型 → 导入 → 作形象来源 | 有版权的模型（Live2D / Booth VRM 等） |
+| `soul` | `.dssoul`：纯文本人设 + 世界书（无模型文件） | 选一个**已装角色/形象**作「形象来源」，合成新角色 | **主打形态**，无版权风险 |
+| `body` | `.dsbody`：只有形象（模型 + 表情/动作词表 + 交互 cue） | 进「形象库」，可给任意已装角色**一键换形象**（记忆/会话保留） | 你有权再分发的模型 |
+| `full` | `.dspack`：完整角色包（灵魂 + 肉体） | 直接可用 | 仅限**你有权再分发**的模型 |
+| `ref` | `.dssoul` + 模型外链指引 | 用户自备模型 → 导入 → 作形象来源 | 灵魂对应的形象有版权（Live2D / Booth VRM 等） |
 
 **默认不托管模型文件。** Live2D 官方模型与 VRoid/Booth 上多数 VRM 都禁止再分发；想上架带模型的
 `full` 型，必须在 PR 里写清可再分发的依据（自制 / 作者书面授权 / 许可证明确允许）。有版权的模型走
@@ -63,16 +69,15 @@ previews/           预览图：<id>.png|jpg|webp（建议 ≤ 500KB，方图）
 ## 上架流程（PR）
 
 1. **准备商品文件**
-   - 灵魂包：用转换脚本从 SillyTavern 卡批量生成（见下），或手工写 `soul.json` 打进 zip 改名 `.dssoul`。
-   - 完整包：在 openpet 里「角色库 → ⋮ → 导出 .dspack」。
-2. 把文件放进 `packs/`，预览图放进 `previews/`（文件名都用 `<id>`）。
-3. 算 sha256：`sha256sum packs/<id>.dssoul`（Windows PowerShell：`Get-FileHash packs\<id>.dssoul -Algorithm SHA256`）。
-4. 往 `index.json` 的 `items` 里加一条（字段见上）。
-5. 提 PR，在描述里回答：
+   - 灵魂包：新建 `souls/<id>/soul.json`（照 `souls/xiaoling/` 抄形状；可放一张 `preview.png`），或用主仓脚本从 SillyTavern 卡批量转（见下）。
+   - 完整包 / 形象包：在 openpet 里「角色库 → ⋮ → 导出 .dspack」/「形象 → 导出 .dsbody」，放进 `packs/`。
+2. 往 `index.json` 的 `items` 里加一条（summary / tags / author / license / type 手写；`downloadUrl` `size` `sha256` 先留空）。
+3. 跑 `node scripts/build.mjs`——灵魂包会被打包进 `packs/`，三个机器字段自动回填。手放的 `.dspack`/`.dsbody` 请自己算好 sha256 填入，再跑 `node scripts/build.mjs --check` 确认一致。
+4. 提 PR，在描述里回答：
    - 内容来源（原创 / 二创 / 转载自哪里）
    - 你有什么权利分发它（自制 / 授权链接 / 许可证）
    - `full` 型另需：**模型可再分发的依据**
-6. 维护者人工过 PR 后合并，条目即刻全网可见。
+5. 维护者人工过 PR 后合并，条目即刻全网可见。
 
 ## 转换脚本（ST 卡 → 灵魂包）
 
